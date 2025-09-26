@@ -2,7 +2,7 @@ import unittest
 
 from linked_list import linked_list_node
 
-class TestLinkedListNodeRead(unittest.TestCase):
+class test_LinkedListNodeRead(unittest.TestCase):
     def setUp(self):
         # Create a linked list: a -> b -> c
         self.head = linked_list_node('a', 'alpha')
@@ -25,7 +25,7 @@ class TestLinkedListNodeRead(unittest.TestCase):
         single = linked_list_node('x', 'xray')
         self.assertIsNone(single.read('y'))
 
-class TestLinkedListNodeUpdate(unittest.TestCase):
+class test_LinkedListNodeUpdate(unittest.TestCase):
     def setUp(self):
         self.head = linked_list_node('a', 'alpha')
         self.head.append('b', 'bravo')
@@ -48,7 +48,7 @@ class TestLinkedListNodeUpdate(unittest.TestCase):
         self.assertFalse(result)
         self.assertIsNone(self.head.read('d'))
 
-class TestLinkedListNodeDelete(unittest.TestCase):
+class test_LinkedListNodeDelete(unittest.TestCase):
     def setUp(self):
         self.head = linked_list_node('a', 'alpha')
         self.head.append('b', 'bravo')
