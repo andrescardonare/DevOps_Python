@@ -1,4 +1,4 @@
-from linked_list import linked_list_node
+from hashmap.linked_list import linked_list_node
 
 class Dictionary:
     def __init__(self, size:int):

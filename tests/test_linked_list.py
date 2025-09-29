@@ -1,6 +1,6 @@
 import unittest
 
-from linked_list import linked_list_node
+from hashmap.linked_list import linked_list_node
 
 class test_LinkedListNodeRead(unittest.TestCase):
     def setUp(self):
