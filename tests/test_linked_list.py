@@ -1,4 +1,6 @@
 import unittest
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from hashmap.linked_list import linked_list_node
 
