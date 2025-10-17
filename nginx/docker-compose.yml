@@ -1,0 +1,69 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    image: dev-proxy-nginx:latest
+    container_name: dev-proxy-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    # No volumes: config is baked into Docker image
+    restart: unless-stopped
+    networks:
+      - frontend
+      - backend
+
+  web1:
+    build:
+      context: ..
+      dockerfile: nginx/Dockerfile.app
+    image: dev-web1:latest
+    container_name: dev-web1
+    working_dir: /app
+    command: bash -lc "pip install -r requirements.txt >/dev/null 2>&1 || true; python -u hashmap/server.py"
+    expose:
+      - "8080"
+    networks:
+      - backend
+
+  web2:
+    build:
+      context: ..
+      dockerfile: nginx/Dockerfile.app
+    image: dev-web2:latest
+    container_name: dev-web2
+    working_dir: /app
+    command: bash -lc "pip install -r requirements.txt >/dev/null 2>&1 || true; python -u price_calculator/server.py"
+    expose:
+      - "8090"
+    networks:
+      - backend
+
+  web3:
+    build:
+      context: ..
+      dockerfile: nginx/Dockerfile.app
+    image: dev-web3:latest
+    container_name: dev-web3
+    working_dir: /app
+    command: bash -lc "pip install -r requirements.txt >/dev/null 2>&1 || true; python -u concatenate_nth/server.py"
+    expose:
+      - "8100"
+    networks:
+      - backend
+
+# NOTE:
+# - This compose file only runs nginx with the proxy config. It assumes the
+#   backend services (web1.internal, web2.internal, web3.internal) are reachable
+#   from the nginx container (e.g. via docker network or host network).
+# - For a local demo you can add simple backend containers (python http.server, nginx with static html, etc.)
+# - To enable HTTPS, mount your certs and modify the proxy.conf to listen on 443 with ssl_certificate directives.
+
+networks:
+  frontend:
+    driver: bridge
+
+  backend:
+    driver: bridge
+    internal: true
