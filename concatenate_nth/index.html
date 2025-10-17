@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Concatenate Nth</title>
+  <style>body{font-family:Arial;margin:2em;}input[type=text]{width:400px}</style>
+</head>
+<body>
+  <h1>Concatenate Nth</h1>
+  {% if error %}
+  <div style="color:red">{{ error }}</div>
+  {% endif %}
+  {% if result %}
+  <div style="font-weight:bold">Result: {{ result }}</div>
+  {% endif %}
+
+  <form method="post">
+    <label>Words (comma-separated):</label><br>
+    <input type="text" name="words" placeholder="abc, de, fgh"><br><br>
+    <button type="submit">Compute</button>
+  </form>
+</body>
+</html>
