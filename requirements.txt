@@ -1,0 +1,4 @@
+Flask>=2.0
+requests>=2.0
+
+# Add other project dependencies here if needed

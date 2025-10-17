@@ -1,0 +1,18 @@
+FROM nginx:stable
+
+# Copy our proxy configuration into the default conf.d location
+COPY proxy.conf /etc/nginx/conf.d/proxy.conf
+
+# Remove the stock default conf that ships with the base image to avoid
+# conflicting server blocks (some images include a default.conf that
+# serves /usr/share/nginx/html or /etc/nginx/html). Deleting it prevents
+# the default file-based site from taking precedence.
+RUN rm -f /etc/nginx/conf.d/default.conf || true
+
+# Add a simple default index page into nginx web roots so the proxy
+# container serves a landing page with links to the three backends.
+COPY index.html /usr/share/nginx/html/index.html
+COPY index.html /etc/nginx/html/index.html
+
+# Keep default command from nginx image
+CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'"] 
