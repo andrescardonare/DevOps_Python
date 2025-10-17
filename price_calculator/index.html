@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Price Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    textarea { width: 400px; height: 80px; }
+    input[type=text] { width: 400px; }
+  </style>
+</head>
+<body>
+  <h1>Price Calculator</h1>
+
+  {% if error %}
+  <div style="color: red; white-space: pre-wrap;">{{ error }}</div>
+  {% endif %}
+
+  {% if result %}
+  <div style="font-weight: bold; margin-bottom: 1em;">Total: {{ result }}</div>
+  {% endif %}
+
+  <form method="post">
+    <label>Costs (JSON):</label><br>
+    <textarea name="costs">{{ costs_example }}</textarea><br>
+
+    <label>Items (comma-separated):</label><br>
+    <input type="text" name="items" placeholder="a, b, c"><br>
+
+    <label>Tax (%):</label><br>
+    <input type="text" name="tax" value="0"><br><br>
+
+    <button type="submit">Calculate</button>
+  </form>
+
+  <p>Example: costs = {"a":1.0, "b":2.0}, items = "a,b", tax = 10</p>
+</body>
+</html>
