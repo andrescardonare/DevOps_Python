@@ -1,4 +1,9 @@
-from hashmap.linked_list import linked_list_node
+try:
+    # Prefer package-relative import
+    from .linked_list import linked_list_node
+except Exception:
+    # Fallback for running from project root or other execution contexts
+    from linked_list import linked_list_node
 
 class Dictionary:
     def __init__(self, size:int):
