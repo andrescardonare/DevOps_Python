@@ -2,17 +2,23 @@ from flask import Flask, request, jsonify, render_template
 import os
 import sys
 
-# Compute project root and ensure it's on sys.path so imports work when this
-# file is executed directly (python hashmap/server.py) or via the package (python -m hashmap.server)
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+# Package directory (this folder)
+package_dir = os.path.dirname(__file__)
 
-# Import Dictionary from package
-from hashmap import Dictionary
+# Ensure package_dir is on sys.path when running the module as a script
+if package_dir not in sys.path:
+    sys.path.insert(0, package_dir)
 
-# Use absolute templates path so flask can find the index.html regardless of CWD
-templates_path = os.path.join(project_root, 'templates')
+# Import Dictionary using a package-relative import when possible
+try:
+    from . import Dictionary
+except Exception:
+    # Fallback when executed in some contexts
+    from hashmap import Dictionary
+
+# Use the hashmap package directory as the templates folder so everything
+# is self-contained inside the hashmap/ folder. index.html sits next to this file.
+templates_path = package_dir
 app = Flask(__name__, template_folder=templates_path)
 dict_instance = Dictionary(20)
 
