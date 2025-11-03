@@ -8,7 +8,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    # No volumes: config is baked into Docker image
     restart: unless-stopped
     networks:
       - frontend
@@ -52,13 +51,6 @@ services:
       - "8100"
     networks:
       - backend
-
-# NOTE:
-# - This compose file only runs nginx with the proxy config. It assumes the
-#   backend services (web1.internal, web2.internal, web3.internal) are reachable
-#   from the nginx container (e.g. via docker network or host network).
-# - For a local demo you can add simple backend containers (python http.server, nginx with static html, etc.)
-# - To enable HTTPS, mount your certs and modify the proxy.conf to listen on 443 with ssl_certificate directives.
 
 networks:
   frontend:

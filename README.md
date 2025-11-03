@@ -1,10 +1,10 @@
 # DevOps_Python
 
-Small Python repo for practicing devops concepts.
+Created as a coding challenge for the EPAM Bootcamp — DevOps External course (LatAm, August 2025). It contains simple demo services and a reverse-proxy setup to practice container networking, proxying, and deployment workflows.
 
 ## Nginx reverse-proxy demo
 
-This repository includes a small demo that runs three local Flask demo apps behind a single nginx reverse proxy. The proxy is configured to expose only nginx to the host; the backend services run on an internal Docker network.
+This repository runs three local Python Flask containers behind a single nginx reverse proxy. The proxy is configured to expose only nginx to the host through a bridged network; the backend services run on an internal Docker network.
 
 Files of interest (in `nginx/`):
 
